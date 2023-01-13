@@ -1,13 +1,19 @@
 /* 
 2 - home page 1 - filtro por select, escolher um dos setores deve ser filtrado */
-
 import {getAllSectors} from './request.js'
+import {login} from "./login.js";
+
+
+//const {token} = getUser()
+
+export function getUser() {
+  const user = JSON.parse(localStorage.getItem("@KenzieEmpresas:user"))
+  return user
+}
 
 async function renderSector(){
     const selectTag = document.querySelector(`#list_empresas`)
     const sectorAll = await getAllSectors()
-
-    
 
     sectorAll.map(sector =>{
         selectTag.insertAdjacentHTML('beforeend', `
@@ -16,7 +22,7 @@ async function renderSector(){
         </option>`)
     })
 }
-renderSector()
+
 
 async function renderChosenSection(chosenSector){
     const ul_chosen_sectors = document.querySelector(`#ul_chosen_sectors`)
@@ -44,26 +50,13 @@ async function renderChosenSection(chosenSector){
     
 }
 
-let buttonGo =  document.querySelector(`#goValue`)
-
-buttonGo.addEventListener(`click`, (e)=>{
-    const sectorSelect = document.querySelector("#list_empresas")
-    const chosenSector =  sectorSelect.value
+const list_empresas =  document.getElementById("list_empresas")
+if(list_empresas){
+    list_empresas.addEventListener('change', (e)=>{
+   
+    const chosenSector =  list_empresas.value
     renderChosenSection(chosenSector)
-})
-
-import {login, getUser} from "./request.js";
-
-function renderLogin() {
-  const user = getUser()
-
-  if(user && user.is_Adm) {
-    window.location.replace("/src/pages/admDashboard.html")
-  } else if (user && !user.is_Adm) {
-    window.location.replace("/src/pages/userDashboard.html")
-  }
-}
-
-
+})}
+renderSector()
 
 

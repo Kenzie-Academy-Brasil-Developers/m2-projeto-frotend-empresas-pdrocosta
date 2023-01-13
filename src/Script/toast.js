@@ -1,3 +1,5 @@
+import Toastify from './toastify-js'
+
 export function toast(text, color) {
     Toastify({
       text: text,
@@ -10,3 +12,5 @@ export function toast(text, color) {
       }
     }).showToast()
   }
+
+  
