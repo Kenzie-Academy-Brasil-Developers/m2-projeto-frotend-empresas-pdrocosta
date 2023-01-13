@@ -5,19 +5,15 @@ async function loginInput() {
     const button = document.querySelector("#login_btn_page")
     const loginUser = {};
   
-  
     button.addEventListener("click", async (event) => {
      
       inputs.forEach((input) => {
         loginUser[input.name] = input.value
       })
-      
-      console.log(loginUser)
-
       const request = await login(loginUser)
   
-      localStorage.setItem("@KenzieEmpresas:user", JSON.stringify(request)); 
-    });
+      localStorage.setItem("@KenzieEmpresas:user", JSON.stringify(request)) 
+    })
   }
   loginInput()
 

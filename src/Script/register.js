@@ -7,7 +7,7 @@ import {toast} from './toast.js'
 
 
 
-export async function createUser(data) {
+/* export async function createUser(data) {
   const newUser = await fetch(`http://localhost:3333/v1/users`, {
     method: 'POST',
     headers: {
@@ -28,7 +28,7 @@ export async function createUser(data) {
 }
 
 
-
+*/
 
 
 

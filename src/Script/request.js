@@ -15,15 +15,15 @@ export async function getAllSectors(){
       })
       return sectors 
 }
-export async function login(loginUser) {
+export async function login(loginInfo) {
     const loginData = await fetch(`http://localhost:6278/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(loginUser),
-    });
+        body: JSON.stringify(loginInfo),
+      }
+    })
   
     const loginDataJson = await loginData.json()
   
@@ -31,15 +31,14 @@ export async function login(loginUser) {
       toast(loginDataJson.message, "#C20803")
     } else {
          toast("Login realizado com sucesso", "#08C203")
-     
-      if(loginData.is_Adm.ok){
-        window.location.replace("/src/pages/admDashboard.html")
-      }
-      else{
-        window.location.replace("/src/pages/userDashboard.html")
-      }
     }
   
     return loginDataJson;
   }
   
+  const {token} = getUser()
+  export function getUser() {
+    const user = JSON.parse(localStorage.getItem("@KenzieEmpresas:user"));
+  
+    return user;
+  }

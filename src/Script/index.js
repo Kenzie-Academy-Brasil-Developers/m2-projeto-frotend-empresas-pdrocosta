@@ -52,18 +52,18 @@ buttonGo.addEventListener(`click`, (e)=>{
     renderChosenSection(chosenSector)
 })
 
-import {login} from "./request.js";
+import {login, getUser} from "./request.js";
 
 function renderLogin() {
   const user = getUser()
 
-  if(user && user.isAdm) {
-    window.location.replace('/src/pages/dashboard.html')
-  } else if (user && !user.isAdm) {
-    window.location.replace('/src/pages/user.html')
+  if(user && user.is_Adm) {
+    window.location.replace("/src/pages/admDashboard.html")
+  } else if (user && !user.is_Adm) {
+    window.location.replace("/src/pages/userDashboard.html")
   }
 }
 
-renderLogin()
+
 
 
