@@ -1,25 +1,44 @@
-/*
-3- cadstro 1 - cadastrar no formulario api, redirecionar para login
+/*3- cadstro 1 - cadastrar no formulario api, redirecionar para login
 4- cadastro 1 - autenticar via api, armazenar no local storage token, redireciona para dashboard */
- import {toast} from './toast.js'
-import {} from './global.js'
-import { getUser } from './index.js'
 
 
-export async function getRegisterInput(){
+export async function registerForm(){
   const inputs = document.querySelectorAll(".inputRegister")
   const btn_confirmCadastro = document.querySelector("#btn_confirmCadastro")
   const newUser = {}
-
   
-  btn_confirmCadastro.addEventListener('click', async(e)=>{
-    inputs.forEach((input)=>{
-      newUser[input.name] = input.value
-    })
-    const request = await createUser(newUser)})
-   
-   return newUser
+    btn_confirmCadastro.addEventListener('click', async(event)=>{
+
+      event.preventDefault()
+
+      inputs.forEach((input)=>{
+        newUser[input.name] = input.value
+      })
+      
+      const request = await login(JSON.stringify(newUser))
+
+      localStorage.setItem('@KenzieEmpresas:user', JSON.stringify(request))
+
+
+     })
+     return newUser
 }
+export async function login(data) {
+
+  const urlsdf = "http://localhost:6278//auth/register"
+  const loginData = await fetch(urlsdf, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+
+  return loginData;
+}
+
 
 export async function createUser(data) {
   
@@ -30,23 +49,65 @@ export async function createUser(data) {
     headers: {"Content-Type": "application/json",
  },
     body: JSON.stringify(dataJSon)
- }).catch(console.log(console.error()))
-
-  const newUserJson = await newUser.json()
-  console.log(newUser )
-  if(!newUser.ok) {
-  toast(newUserJson.message, '#C20803')
-   //console.log("erro")
-  } else {
-   // console.log("logado")
-    toast('Usuário cadastrado com sucesso', '#08C203')
-  }
-
-  return newUserJson
+ })
+ .then( (response => response.json() ))
+ .catch(console.log(`error`))
+  return newUser
 }
+/*const newUserJson = await createUser(getRegisterInput())
+  console.log(newUserJson)
+  if(!newUserJson) {
+  //toast(newUserJson.message, '#C20803')
+   console.log("erro")
+  } else {
+    console.log("logado")
+    //toast('Usuário cadastrado com sucesso', '#08C203')*/
+  
+
+  function createUserForm() {
+    const inputs = document.querySelectorAll('.inputRegister')
+    const button = document.querySelector('#btn_confirmCadastro')
+    const newUser = {}
+  
+    button.addEventListener('click', async (event) => {
+      event.preventDefault()
+  
+      inputs.forEach(input => {
+        newUser[input.name] = input.value
+      })
+  
+      const request = await createUser(newUser)
+    })
+  
+    return newUser
+  }
+  registerForm()
+  createUserForm()
+
+  export const name = () => {};
+  async function confirmUser(){
+
+    const newUserJson =  createUser
+    console.log(newUserJson)
+    if(!newUserJson) {
+    //toast(newUserJson.message, '#C20803')
+     console.log("erro")
+    } else {
+      console.log("logado")
+      //toast('Usuário cadastrado com sucesso', '#08C203')
+    }
+    return newUserJson
+    } 
+   // createUser(getRegisterInput())
+     confirmUser()
+
+  
+
+  
 
 
-console.log(createUser(getRegisterInput()))
+
+
 
 
 /* export async function readProfile() {

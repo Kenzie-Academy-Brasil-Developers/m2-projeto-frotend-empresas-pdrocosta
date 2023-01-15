@@ -1,4 +1,4 @@
-import Toastify from './toastify-js'
+/* import Toastify from './toastify-js'
 
 export function toast(text, color) {
     Toastify({
@@ -13,4 +13,4 @@ export function toast(text, color) {
     }).showToast()
   }
 
-  
+  */

@@ -2,9 +2,10 @@
 18 - logout - 2 - remove infos de local storage e vai apra homepage
 19 - mobile first 2 - login register e home page, 
 20 - demonstrar tostfy de acerto com uma mensagem respectiva, demonstrar toastfy com erro */
+
+// import { getRegisterInput} from './register.js'
+// import {toast} from './toast.js'
 /*
-import { getRegisterInput} from './register.js'
-import {toast} from './toast.js'
 import { getUser } from './index.js'
 */
 export async function getAllSectors(){
