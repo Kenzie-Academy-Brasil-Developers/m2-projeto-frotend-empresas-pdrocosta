@@ -14,8 +14,8 @@ export async function registerForm(){
       inputs.forEach((input)=>{
         newUser[input.name] = input.value
       })
-      
-      const request = await login(JSON.stringify(newUser))
+      const newUserjSon = newUser.json
+      const request = await login(newUserjSon)
 
       localStorage.setItem('@KenzieEmpresas:user', JSON.stringify(request))
 
@@ -25,35 +25,55 @@ export async function registerForm(){
 }
 export async function login(data) {
 
-  const urlsdf = "http://localhost:6278//auth/register"
+  const urlsdf = "http://localhost:6278/auth/register"
   const loginData = await fetch(urlsdf, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    
     body: JSON.stringify(data),
   })
-    .then((res) => res.json())
-    .catch((err) => console.log(err));
+   // .then((res) => res.json())
+    .catch((err) => console.log(err))
+    const loginDataJson = await loginData.json();
 
-  return loginData;
-}
+    if (!loginData.ok) {
+      console.log('erro')
+      //toast(loginDataJson.message, "#C20803");
+    } else {
+      //toast("Login realizado com sucesso", "#08C203");
+      window.location.replace("/src/pages/login.html");
+    }
+  
+    return loginDataJson;
+  }
+
+
 
 
 export async function createUser(data) {
   
+  const urlsdf = "http://localhost:6278/auth/register"
   const dataJSon = JSON.stringify(data)
   console.log(dataJSon)
-  const newUser = await fetch(`http://localhost:6278/auth/register`, {
+  const newUser = await fetch(urlsdf, {
     method: 'POST',
     headers: {"Content-Type": "application/json",
  },
     body: JSON.stringify(dataJSon)
  })
- .then( (response => response.json() ))
- .catch(console.log(`error`))
-  return newUser
+
+ const newUserJson = await dataJSon.json();
+  if (!dataJSon.ok) {
+    console.log('erro')
+ // toast(newUserJson.message, "#C20803");
+} else {
+  console.log('logado')
+ // toast("Usuário cadastrado com sucesso", "#08C203");
 }
+
+return newUserJson;
+}
+
+
 /*const newUserJson = await createUser(getRegisterInput())
   console.log(newUserJson)
   if(!newUserJson) {
@@ -79,7 +99,7 @@ export async function createUser(data) {
       const request = await createUser(newUser)
     })
   
-    return newUser
+    
   }
   registerForm()
   createUserForm()
