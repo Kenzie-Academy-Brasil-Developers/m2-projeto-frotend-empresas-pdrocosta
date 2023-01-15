@@ -12,6 +12,7 @@ export async function loginInput() {
       })
       const newUserjSon = loginUser.json
       console.log(JSON.stringify(loginUser))
+      const asdfasd = localStorage.setItem("@TokenUser", newUserjSon)
 
       const request = await loginUser2(loginUser)
       
@@ -69,12 +70,12 @@ async function getUser(dataUser, token) {
   const auth = await getAuthorization(getUser(loginInfo, loginDataJson))
   console.log(auth)
   localStorage.setItem("@KenzieUser",JSON.stringify(loginInfo.email))
-  /*if(auth){
+  if(auth){
     window.location.replace("/pages/pages/admDashboard.html")
   }
   else{
-    window.location.replace("/pages/pages/userDashboard.html")
-  }*/
+    window.location.replace("/")
+  }
   return auth
 }
 

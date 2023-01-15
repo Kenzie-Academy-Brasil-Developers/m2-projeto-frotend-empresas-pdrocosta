@@ -2,7 +2,7 @@
 14- dashboard user 2 - renderiza infos como user, email, caro e modalidade, possui botao editar
 15- dashboard user2  - editar informacoes pessoais, como user, email e senha. atualiza api 
 16- dashboard user 2 - renderizare coworkers com nome e cargo, nome da empresa e departamento */
-import { getUser } from "./request.js";
+
 /*const adsfdsdsdf= (localStorage.getItem("@TokenBearer"))
 console.log(adsfdsdsdf)
 const objToken = {"token":eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiNWEyMDJkYTQtZjE0Yi00NDE4LThmZmQtYTRjN2FiM2MxMTQ1IiwiaXNfYWRtaW4iOmZhbHNlLCJpYXQiOjE2NjY5NjE2MDQsImV4cCI6MTY2NzgyNTYwNCwic3ViIjoiW29iamVjdCBVbmRlZmluZWRdIn0.xY83FhJMTkMETeIbdJedQMFDtEEEXRe3Cb6R28iUY7s}
@@ -81,11 +81,41 @@ export async function getNewUserInfos(){
   return JSON.stringify(newInfosUser)
 }
 
+const tokenJSON =  localStorage.getItem('@TokenBearer')
+const aodsfkoasd = localStorage.getItem('@TokenBearer')
+console.log(aodsfkoasd)
+
+async function getCoworkersByToken(){
+  const coworkers = await fetch('http://localhost:6278/users/departments/coworkers' ,
+    {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${aodsfkoasd}`
+        }
+    })
+    
+    .then((response) => {
+      // const asdfasd = localStorage.setItem("@TokenCoworkers", JSON.stringify(response))
+      console.log(response)
+        return response.json()
+    })
+
+    .then((response) => {
+        return response
+    })
+    console.log(coworkers)
+    return coworkers
+}   
+getCoworkersByToken()
+
+
+
 getNewUserInfos()
 
 
 
-
+// botao edit nao esta funcionando, precisa pegar as infos e mandar com patch para os ervidor, e entao buscar renderizra os coworkers atraves do {{ _.baseUrl }}/users/departments/coworkersm , metodo get 
 
 
 
