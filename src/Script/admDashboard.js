@@ -52,8 +52,8 @@ async function renderAllOut(){
       <p class="p-outof">${e.kind_of_work} </p>
       <p class="p-outof-nome">${e.email}</p>
       <div class="div-icones">
-          <img class="img-lapis" src="/src/Assets/iconPencil.png" alt="">
-          <img class="img-delete" src="/src/Assets/iconTrash.png" alt="">
+          <img class="img-lapis" src="src/Assets/iconPencil.png" alt="">
+          <img class="img-delete" src="src/Assets/iconTrash.png" alt="">
       </li>
     
     `)
@@ -77,7 +77,7 @@ async function renderAllUsers(){
      
       </button>
       <button id="delete_btn" class="img-trash" value="${e.uuid} onclick="deleteClick()" type="submit">
-      <img class="img-delete"  src="/src/Assets/iconTrash.png" alt="">
+      <img class="img-delete"  src="src/Assets/iconTrash.png" alt="">
       </button>
           
       </li>

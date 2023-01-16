@@ -73,11 +73,11 @@ async function getUser(dataUser, token) {
   localStorage.setItem("@KenzieUser",JSON.stringify(loginInfo.email))
 
   if(auth.is_admin){
-    window.location.replace("/src/Pages/admDashboard.html")
+    window.location.replace("src/Pages/admDashboard.html")
   }
   else if(!auth.is_admin){
    
-    window.location.replace("/src/Pages/user1Dashboard.html")
+    window.location.replace("src/Pages/user1Dashboard.html")
     
   }
   else{
