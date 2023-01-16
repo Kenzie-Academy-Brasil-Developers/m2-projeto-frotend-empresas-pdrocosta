@@ -26,7 +26,7 @@
         <section id="section-departamentos">
             <div id="div-departamentos">
                 <h3>Departamentos</h3>
-                <select name="selecionar Empresa" id="select-empresa">
+                <select name="selecionarEmpresa" id="select-empresa">
                     <option id="option-placeholder" value="">Selecionar Empresa</option>
                 </select>
                 <button type="button" id="button-criar"><img src="/src/Assets/IconX.png" alt=""> <p>Criar</p></button>
@@ -57,20 +57,60 @@
                     <button class="close-button-modal"><img src="/src/Assets/iconX.png" alt=""></button>
                     <h2 class="h2-modal">Criar Departamento</h2>
                     <form action="" class="form-editar">
-                        <input type="text" name="name" class="input-modal" placeholder="Nome do departamento">
-                        <input type="text" name="description" class="input-modal" placeholder="Descrição">
+                        <input type="text" name="name" class="input-modal" id="input_infos" placeholder="Nome do departamento">
+                        <input type="text" name="description" id="input_infos" class="input-modal" placeholder="Descrição">
                         
                     </form>
                     <select class="input-modal" name="select_company" id="select_new" title="Selecione a empresa" >
                             <option  id="option-placeholder" value="" disabled selected>Selecionar Empresa</option>
                         </select>
                         
-                        <button class="button-modal" id="btnCreate" >Criar Departamento</button>
+                        <button class="button_modal" type="submit" id="btnCreate" >Criar Departamento</button>
                 </div>
             </div >
         </section>
+        <section class="modal none" id="editUser_modal">
+             <div class="modal">
+            <div class="div-modal" id="editar-usuário">
+                <button type="submit" class="close-button-modal" onclick="closeModal()"><img src="/src/Assets/iconTrash.png" alt=""></button>
+                <h2 class="h2-modal">Editar Usuário</h2>
+                
+                    <select class="input-modal" id="selectEdits1" name="kind_of_work" class="modalidade-trabalho">
+                        <option id="option-placeholder" value="" >Selecionar modalidade-trabalho</option>
+                        <option value="presencial">Presencial</option>
+                        <option value="home office">Home Office</option>
+                        <option value="hibrido">Hibrido</option>
+
+                    </select>
+                    <select class="input-modal" id="selectEdits2" name="professional_level" >
+                        <option  id="option-placeholder" value="">Selecionar nível profissional</option>
+                        <option value="estágio">estágio</option>
+                        <option value="júnior"> júnior</option>
+                        <option value="sênior">sênior</option>
+                        <option value="pleno">pleno</option>
+                    </select>
+                    
+                    <button type="submit" class="button_modal" id="btnEditUser" >Editar Perfil</button>
+               
+            </div>
+        </div >
+    </section>
         
     </main>
 </body>
+<script type="module">
+
+ 
+   
+    function openModal(){
+        const modalEdit = document.querySelector("#editUser_modal")
+        modalEdit.classList.toggle("none")
+    }
+    function closeModal(){
+        const modalEdit = document.querySelector("#editUser_modal")
+        modalEdit.classList.toggle("none")
+    }
+    
+</script>
 <script type="module" defer src="/src/Script/admDashboard.js"></script>
 </html>

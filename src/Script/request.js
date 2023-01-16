@@ -96,10 +96,6 @@ export async function getAllDptsAdm(){
   .catch(err=> console.log(err))
   return allDpts
 }
-
-// admin token
-
-
 export async function getOutofWork(){
   const allOut =  await fetch (`http://localhost:6278/admin/out_of_work`, {
     method: 'GET',
@@ -197,6 +193,7 @@ export async function postNewDpt(data){
       return res
   })
   .catch(err=> console.log(err))
+  console.log(postDpt)
   return postDpt
 }
 
@@ -207,12 +204,49 @@ export async function getAllCompanies(){
   })
   .then(res => res.json()) 
   .then(res => {
+      const res2 = res.JSON
       return res
   })
   console.log(companies)
   return companies 
 }
-console.log(getAllCompanies())
+
+export async function patchUserInfosAdm(data){
+  const patchInf =  await fetch (`http://localhost:6278/admin/update_user/5a202da4-f14b-4418-8ffd-a4c7ab3c1145`, {
+    method: 'PATCH',
+    body: data,
+    headers:{
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+      }
+     
+  })
+  .then(res => res.json()) 
+  .then(res => {
+      return res
+  })
+  .catch(err=> console.log(err))
+  
+  return patchInf
+}
+
+export async function delUserInfos(data){
+ 
+const delInfo =  await fetch (` http://localhost:6278/admin/delete_user/${data}`, {
+  method: 'DELETE',
+  body: data,
+  headers:{
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+    }
+   
+})
+.then(res => {
+    return res})
+.catch(err=> console.log(err))
+
+return delInfo
+}
 
 
 

@@ -118,7 +118,7 @@ main{
     font-weight: 700;
     font-size: 25px;
     line-height: 39px;
-    /* identical to box height */
+
     background: #4200FF;
     text-align: center;
     padding: 18px 20px 20px 20px;
@@ -300,7 +300,14 @@ line-height: 22px;
 .none{
     display: none;
 }
-
+#edit_btn{
+    z-index: 2;
+    background-image: url("/src/Assets/iconPencil.png") ;
+    width: 100%;
+}
+#delete_btn{
+    z-index: 2;
+}
 
 #h3-Usuários{
     text-align: center;
@@ -321,22 +328,21 @@ line-height: 36px;
     margin-bottom: 44px;
 }
 
-/* width */
+
 ::-webkit-scrollbar {
     width: 10px;
   }
   
-  /* Track */
+ 
   ::-webkit-scrollbar-track {
     background: #f1f1f1;
   }
-  
-  /* Handle */
+
   ::-webkit-scrollbar-thumb {
     background: var(--color-purple-1);
   }
   
-  /* Handle on hover */
+
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
