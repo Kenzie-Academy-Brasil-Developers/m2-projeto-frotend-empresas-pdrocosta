@@ -280,7 +280,7 @@ line-height: 22px;
 }
 #edit_btn{
     z-index: 2;
-    background-image: url("/src/Assets/iconPencil.png") ;
+    background-image: url("src/Assets/iconPencil.png") ;
     width: 100%;
 }
 #delete_btn{
@@ -327,12 +327,6 @@ line-height: 36px;
     border-radius: 20px;
     padding: 6px 10px;
 }
-
-
-
-
-
-/* MODAIS*/
 
 .div-modal{
     padding: 15px 17px;
