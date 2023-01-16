@@ -239,7 +239,6 @@ const delInfo =  await fetch (` http://localhost:6278/admin/delete_user/${data}`
     "Content-Type": "application/json",
     Authorization: `Bearer ${token}`,
     }
-   
 })
 .then(res => {
     return res})
@@ -247,19 +246,3 @@ const delInfo =  await fetch (` http://localhost:6278/admin/delete_user/${data}`
 
 return delInfo
 }
-
-
-
-
-
-
-
-
-
-
-
-
-/*"Content-Type": "application/json",
-    
-Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiZjg1YmM4NjgtZDNhMy00ZmMxLWIxYmYtZDg1ZGI5MWYwOGEyIiwiaXNfYWRtaW4iOmZhbHNlLCJpYXQiOjE2NzM3NjUwMjMsImV4cCI6MTY3NDYyOTAyMywic3ViIjoiW29iamVjdCBVbmRlZmluZWRdIn0.-11Jw_qGKucvgGMwRyvxzqpbnbxKRBpJXdcSQZHjdOY`
-*/

@@ -52,8 +52,8 @@ async function renderAllOut(){
       <p class="p-outof">${e.kind_of_work} </p>
       <p class="p-outof-nome">${e.email}</p>
       <div class="div-icones">
-          <img class="img-lapis" src="src/Assets/iconPencil.png" alt="">
-          <img class="img-delete" src="src/Assets/iconTrash.png" alt="">
+          <img class="img-lapis" src="/src/Assets/iconPencil.png" alt="">
+          <img class="img-delete" src="/src/Assets/iconTrash.png" alt="">
       </li>
     
     `)
@@ -74,9 +74,8 @@ async function renderAllUsers(){
       <p class="p-outof-nome">${e.email}</p>
       <div class="div-icones">
       <button id="edit_btn" onclick="openModal()" value="${e.uuid}"class="img-lapis" type="submit">
-     
       </button>
-      <button id="delete_btn" class="img-trash" value="${e.uuid} onclick="deleteClick()" type="submit">
+      <button id="delete_btn" class="img-trash" value="${e.uuid}"  type="submit">
       <img class="img-delete"  src="src/Assets/iconTrash.png" alt="">
       </button>
           
@@ -85,7 +84,6 @@ async function renderAllUsers(){
     `)
   })
 }
-
 async function renderDPToptions(){
   const allDpts = await getAllDptsAdm()
   const select_empresa = document.querySelector("#select-empresa")
@@ -108,7 +106,6 @@ async function filterByDpt(){
     renderChosenDpt(chosenDpt)
     })
 }}
-
 async function renderSelectEmpresas(){
   window.onload = async function() {
   const select = document.querySelector("#select_new")
@@ -126,7 +123,6 @@ if(select){
 }
 
 }
-
 async function getInfosNewDpt(){
   const btnCreate = document.querySelector("#btnCreate")
   const main =  document.querySelector("main")
@@ -150,7 +146,7 @@ async function getInfosNewDpt(){
     })
     }
    
-  }
+}
 async function openModal(){
   const button_criar =  document.querySelector("#button-criar")
 
@@ -193,23 +189,23 @@ return selectValueJSON
 
 }
  export async function deleteClick(){
-  const delete_btn = document.querySelectorAll(".img-delete")
-  const uuid = ""
+  const btns = await renderAllUsers()
+  const delete_btn = document.querySelectorAll("#delete_btn")
+  
   console.log(delete_btn)
   if(delete_btn){
-  delete_btn.addEventListener('click',(e)=>{
-    uuid = delete_btn.value
-    console.log(uuid)
-  })
-  console.log(uuid)
-  delUserInfos(uuid)
-  }
+  delete_btn.forEach((e)=>{
+    e.addEventListener('click',(event)=>{
+      const uuid = e.value
+      console.log(uuid)
+      delUserInfos(uuid)
+    })})}
 }
 
 
 
 
-deleteClick()
+
 renderAllUsers()
 renderAllDpts()
 getSelectValueEditUser()
@@ -221,7 +217,7 @@ openModal()
 getInfosNewDpt()
 renderSelectEmpresas()
 
-
+deleteClick()
 
 
 

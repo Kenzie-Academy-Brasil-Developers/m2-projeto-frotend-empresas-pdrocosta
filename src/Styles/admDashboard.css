@@ -2,7 +2,6 @@ main{
     margin: 0 4%;
     padding-top: 20px;
 }
-
 header{
     display: flex;
     flex-direction: row;
@@ -10,8 +9,6 @@ header{
     border-bottom: solid black 1px;
     padding: 20px 0px;
 }
-
-
 #imglogo{
     margin-top: 2px;
 }
@@ -34,13 +31,9 @@ header{
     letter-spacing: 0em;
     text-align: center;
     color: purple;
-    background-color: white;
-        
+    background-color: white;  
     padding: 13px 29px;
-        
     border: none ;
-
-    
 }
 #div-top-right{
     margin-right: 4%;
@@ -280,26 +273,30 @@ line-height: 22px;
 }
 #edit_btn{
     z-index: 2;
-    background-image: url("src/Assets/iconPencil.png") ;
-    width: 100%;
+    background-image: url("/src/Assets/iconPencil.png") ;
+    background-size: cover;
+    width: 20%;
+    border: none;
 }
 #delete_btn{
-    z-index: 2;
+    z-index: 2; 
+    background-image: url("/src/Assets/iconTrash.png") ;
+    background-size: cover;
+    width: 20%;
+    border: none;
 }
-
 #h3-Usuários{
     text-align: center;
     height: 50px;
     width: 100%;
     margin: 0px auto;
-    margin-top: 70px;margin-bottom: 70px;
-
-    
-font-family: 'Inter';
-font-style: normal;
-font-weight: 700;
-font-size: 27px;
-line-height: 36px;
+    margin-top: 70px;
+    margin-bottom: 70px; 
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 27px;
+    line-height: 36px;
 }
 
 #section-usuarios{

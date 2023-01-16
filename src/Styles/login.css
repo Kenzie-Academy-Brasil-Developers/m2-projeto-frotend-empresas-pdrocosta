@@ -1,5 +1,5 @@
 main{
-    background-image: url(src/Assets/imgHome2.png);
+    background-image: url(/src/Assets/imgHome2.png);
     height: 100%;
     width: 100%;
     background-size: cover;
