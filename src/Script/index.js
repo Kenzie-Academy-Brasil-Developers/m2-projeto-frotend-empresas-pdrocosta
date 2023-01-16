@@ -1,7 +1,7 @@
 /* 
 2 - home page 1 - filtro por select, escolher um dos setores deve ser filtrado */
 import {getAllSectors} from './request.js'
-import {login} from "./login.js";
+//import {login} from "./login.js";
 
 
 //const {token} = getUser()

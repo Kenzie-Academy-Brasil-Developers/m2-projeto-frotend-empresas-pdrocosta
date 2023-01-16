@@ -10,9 +10,9 @@ export async function loginInput() {
       inputs.forEach((input) => {
         loginUser[input.name] = input.value
       })
-      const newUserjSon = loginUser.json
-      console.log(JSON.stringify(loginUser))
-      const asdfasd = localStorage.setItem("@TokenUser", newUserjSon)
+      //const newUserjSon = loginUser.json
+      // console.log(JSON.stringify(loginUser))
+      localStorage.setItem("@KenzieEmpresas:user",JSON.stringify(loginUser))
 
       const request = await loginUser2(loginUser)
       
@@ -32,8 +32,7 @@ export async function loginInput() {
     })
     
     .then((response) => {
-       const asdfasd = localStorage.setItem("@TokenBearer",userToken.token)
-      console.log(asdfasd)
+       
         return response.json()
     })
 
@@ -54,30 +53,39 @@ async function getUser(dataUser, token) {
 
 
  export async function loginUser2(loginInfo) {
+    const bodyInfos = JSON.stringify(loginInfo)
     const loginData = await fetch('http://localhost:6278/auth/login',{ 
     method: 'POST',
-    //Authorization: `Bearer ${token}`,
-    body: JSON.stringify(loginInfo),
+   
+    body: bodyInfos,
     headers: {
       'Content-Type': 'application/json'
  }})
- console.log(loginInfo)
+
  const loginDataJson =  await loginData.json()
- console.log(loginDataJson)
-  localStorage.setItem(`token-${loginInfo}`, JSON.stringify(loginDataJson))
+
+
+  localStorage.setItem(`token`, JSON.stringify(loginDataJson))
  
-  const token1234 = getUser(loginInfo, loginDataJson)
+  
   const auth = await getAuthorization(getUser(loginInfo, loginDataJson))
-  console.log(auth)
+  
   localStorage.setItem("@KenzieUser",JSON.stringify(loginInfo.email))
-  if(auth){
-    window.location.replace("/pages/pages/admDashboard.html")
+
+  if(auth.is_admin){
+    window.location.replace("/src/Pages/admDashboard.html")
+  }
+  else if(!auth){
+    window.location.replace("/index.html")
+    
   }
   else{
-    window.location.replace("/")
+    window.location.replace("/src/Pages/user1Dashboard.html")
   }
   return auth
-}
+  }
+ 
+
 
 
   loginInput()

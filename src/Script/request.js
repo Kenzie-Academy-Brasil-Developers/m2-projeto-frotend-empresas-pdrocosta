@@ -3,12 +3,6 @@
 19 - mobile first 2 - login register e home page, 
 20 - demonstrar tostfy de acerto com uma mensagem respectiva, demonstrar toastfy com erro */
 
-// import { getRegisterInput} from './register.js'
-// import {toast} from './toast.js'
-/*
-import { getUser } from './index.js'
-*/
-// import {loginInput } from `./login.js`
 export async function getAllSectors(){
     const sectors = await fetch(`http://localhost:6278/sectors`, {
         method: 'GET',
@@ -19,38 +13,76 @@ export async function getAllSectors(){
       })
       return sectors 
 }
-
-/*
-async function registerUser(userInfos){
-  const user = await fetch ('http://localhost:6278/auth/register',{
-    method: 'POST',
-    headers: {"Content-Type": "application/json",
-    Authorization: `Bearer ${token}`}
-  }
-  .then((response)=>{
-    console.log (response.userInfos)
-  }
-))}
-registerUser(getRegisterInput()) */
-
 getAllSectors()
 
 const user = getUser() || {};
 const { token } = user;
-const baseUrl = "http://localhost:3333/v1";
+console.log(token)
+const baseUrl = "http://localhost:6278/";
 const requestHeaders = {
   "Content-Type": "application/json",
   Authorization: `Bearer ${token}`,
 };
-const red = "#C20803";
-const green = "#08C203";
 const email = localStorage.getItem(`@KenzieEmpresas:user`)
-console.log(email)
-export function getUser() {
-  const user = JSON.parse(localStorage.getItem("token- ${} "))
 
-  return user;
+export function getUser() {
+  const user = JSON.parse(localStorage.getItem("token"))
+  return user
 }
+
+
+export async function requestUserInfos(){
+  const userInfosGET = await fetch('http://localhost:6278/users/profile',{
+    method: 'GET',
+    headers:{
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+    }
+  })
+  .then(res => res.json()) 
+  .then(res => {
+      return res
+  })
+  console.log(userInfosGET)
+  return userInfosGET 
+}
+export async function requestUserCoworkers(){
+  const coworkersInfosGET = await fetch('http://localhost:6278/users/departments/coworkers',{
+    method: 'GET',
+    headers:{
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+    }
+  })
+  .then(res => res.json()) 
+  .then(res => {
+      return res
+  })
+  console.log(coworkersInfosGET)
+  return coworkersInfosGET 
+
+}
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*"Content-Type": "application/json",

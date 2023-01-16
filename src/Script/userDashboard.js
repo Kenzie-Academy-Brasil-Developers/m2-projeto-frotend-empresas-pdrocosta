@@ -3,33 +3,40 @@
 15- dashboard user2  - editar informacoes pessoais, como user, email e senha. atualiza api 
 16- dashboard user 2 - renderizare coworkers com nome e cargo, nome da empresa e departamento */
 
-/*const adsfdsdsdf= (localStorage.getItem("@TokenBearer"))
-console.log(adsfdsdsdf)
-const objToken = {"token":eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiNWEyMDJkYTQtZjE0Yi00NDE4LThmZmQtYTRjN2FiM2MxMTQ1IiwiaXNfYWRtaW4iOmZhbHNlLCJpYXQiOjE2NjY5NjE2MDQsImV4cCI6MTY2NzgyNTYwNCwic3ViIjoiW29iamVjdCBVbmRlZmluZWRdIn0.xY83FhJMTkMETeIbdJedQMFDtEEEXRe3Cb6R28iUY7s}
-const baseUrl = "http://localhost:6278/";
-const requestHeaders = {
-  'Content-Type': 'application/json'
- // Authorization: `Bearer ${objToken}`,
-}*/
+
+import {requestUserInfos, requestUserCoworkers} from './request.js'
 
 
 export async function renderUserInfos(){
   const p_user = document.querySelector("#p_user")
   const p_email = document.querySelector("#p_email")
 
-  const infos = localStorage.getItem("@KenzieEmpresas:user")
-  const infos2 = JSON.parse(infos)
-  const infos3 = infos2.username
+  const infos = await requestUserInfos()
+  const email =  await infos.email
+  const username =  await infos.username
 
-  const email = localStorage.getItem("@KenzieEmpresas:user")
-  const email2 = JSON.parse(email)
-  const email3 = email2.email
-
-  console.log(infos3)
-  p_user.innerHTML = infos3
-  p_email.innerHTML = email3
+  
+  p_user.innerHTML = username
+  p_email.innerHTML = email
 }
 renderUserInfos()
+
+
+export async function renderCoworkersInfos(){
+const ul_coworkers = document.querySelector("#ul_coworkers")
+const coworkersInfos =  await requestUserCoworkers()
+const companyAndDptName = document.getElementById(companyAndDptName)
+
+companyAndDptName.innerText(`${coworkersInfos.description}`)
+ul_coworkers.insertAdjacentHTML('beforeend',`
+    <li class="coworkers-card" id="${coworkersInfos.users.username}.card">
+    <h3 class="h3-nome">${coworkersInfos.users.username}</h3>
+    <p class="p-posição">${coworkersInfos.users.professional_level}</p>
+</li>
+`)}
+renderCoworkersInfos()
+
+
 
 async function editUserInfos(){
   const editBtn = document.querySelector("#button-edit")
@@ -49,7 +56,7 @@ async function editUserInfos(){
         </form>
         <button class="buttonmodal" id="editGoBtn">Editar Perfil</button>
     </div>
-  </div >`), getNewUserInfos()
+  </div >`)
   
   const modal =  document.querySelector(".modal")
   const closeBtn =  document.querySelector(".close-button-modal")
@@ -64,55 +71,29 @@ async function editUserInfos(){
 }
 
 
-editUserInfos()
-
 export async function getNewUserInfos(){
   const inputs = document.querySelectorAll("input")
   const btnEdit =  document.getElementById("editGoBtn")
   const newInfosUser = {}
   
- if(btnEdit){
+ 
   console.log(btnEdit)
   btnEdit.addEventListener(`click`,()=>{
     newInfosUser[inputs.name]=inputs.value
-  })}
+  })
   console.log(JSON.stringify(newInfosUser))
 
   return JSON.stringify(newInfosUser)
 }
-
-const tokenJSON =  localStorage.getItem('@TokenBearer')
-const aodsfkoasd = localStorage.getItem('@TokenBearer')
-console.log(aodsfkoasd)
-
-async function getCoworkersByToken(){
-  const coworkers = await fetch('http://localhost:6278/users/departments/coworkers' ,
-    {
-        method: 'GET',
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${aodsfkoasd}`
-        }
-    })
-    
-    .then((response) => {
-      // const asdfasd = localStorage.setItem("@TokenCoworkers", JSON.stringify(response))
-      console.log(response)
-        return response.json()
-    })
-
-    .then((response) => {
-        return response
-    })
-    console.log(coworkers)
-    return coworkers
-}   
-getCoworkersByToken()
-
-
-
+editUserInfos()
 getNewUserInfos()
 
+
+
+/* editUserInfos()
+getNewUserInfos()
+getCoworkersByToken()
+renderUserInfos() */
 
 
 // botao edit nao esta funcionando, precisa pegar as infos e mandar com patch para os ervidor, e entao buscar renderizra os coworkers atraves do {{ _.baseUrl }}/users/departments/coworkersm , metodo get 

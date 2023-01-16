@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kenzie Empresas</title>
     <link rel="stylesheet" href="/src/Styles/globalStyles.css">
-    <link rel="stylesheet" href="/src/Styles/admDashboard.css">
+    <link rel="stylesheet" href="/src/Styles/userDashboard.css">
 </head>
 <body>
     <header>
@@ -15,7 +15,8 @@
             <h1 id="kenzie_homepage">Kenzie Empresas</h1></a>
         </div>
         <div id="header_div_button">
-            <button id="btn_logout" class="button_header">btn_logout</button></a>
+            <a href="/index.html"><button id="btn_logout" class="button_header">Logout</button></a></a>
+            
         </div>
     </header>
     <main>
@@ -23,12 +24,11 @@
             <h1 id="user_h1"></h1>
             <div id="div_infos">
                 <p id="email_user"></p>
-                <button id="edit_user"><img src="/src/Assets/iconPencil.png" alt="iconEdit"></button>
             </div>
         </section>
 
         <section>
-            <h1>Voce ainda nao foi contratado</h1>
+            
             <section id="section-user">
                 <div>
                     
@@ -40,7 +40,18 @@
                 </div>
                 <button id="button-edit"><img src="/src/Assets/iconPencil.png" alt=""></button>
             </section>
-            
+            <section>
+                <h2 id="companyAndDptName"></h2>
+                <div id="div-wrapper-coworkers">
+                    <ul id="ul_coworkers">
+                        <li class="coworkers-card">
+                            <h3 class="h3-nome"></h3>
+                            <p class="p-posição"></p>
+                        </li>
+
+                    </ul>
+                </div>
+            </section>
         </section>
     </main>
     <script type="module" src="/src/Script/userDashboard.js"></script>
