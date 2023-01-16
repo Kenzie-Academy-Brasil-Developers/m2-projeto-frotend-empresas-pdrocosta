@@ -4,18 +4,21 @@
 16- dashboard user 2 - renderizare coworkers com nome e cargo, nome da empresa e departamento */
 
 
-import {requestUserInfos, requestUserCoworkers} from './request.js'
+import {requestUserInfos, requestUserCoworkers, patchUserInfos} from './request.js'
 
 
 export async function renderUserInfos(){
   const p_user = document.querySelector("#p_user")
   const p_email = document.querySelector("#p_email")
+  const p_modalidade = document.querySelector("#p_modalidade")
 
   const infos = await requestUserInfos()
   const email =  await infos.email
   const username =  await infos.username
+  const modalidade = await infos.professional_level
 
-  
+
+  p_modalidade.innerHTML = modalidade
   p_user.innerHTML = username
   p_email.innerHTML = email
 }
@@ -28,7 +31,7 @@ const coworkersInfos =  await requestUserCoworkers()
 const companyAndDptName = document.getElementById(companyAndDptName)
 
 companyAndDptName.innerText(`${coworkersInfos.description}`)
-ul_coworkers.insertAdjacentHTML('beforeend',`
+ul_coworkers.insertAdjacentHTML('afterbegin',`
     <li class="coworkers-card" id="${coworkersInfos.users.username}.card">
     <h3 class="h3-nome">${coworkersInfos.users.username}</h3>
     <p class="p-posição">${coworkersInfos.users.professional_level}</p>
@@ -45,16 +48,16 @@ async function editUserInfos(){
   editBtn.addEventListener(`click`, ()=>{
     main.insertAdjacentHTML('beforeend',`
     <div class="modal">
-    <div class="div-modal">
+    <div class="div-modal" id="div_modal">
         <button class="close-button-modal" id="closeBtn"><img src="/src/Assets/iconX.png" alt=""></button>
         <h2 class="h2-modal">Editar Perfil</h2>
         <form action="" class="form-editar">
             <input type="text" name="name" class="input-modal" placeholder="Seu Nome">
             <input type="text" name="email" class="input-modal" placeholder="Seu e-mail">
             <input type="text" name="password" class="input-modal" placeholder="Sua senha">
-            
+            <button class="buttonmodal" type="submit" id="editGoBtn">Editar Perfil</button>
         </form>
-        <button class="buttonmodal" id="editGoBtn">Editar Perfil</button>
+        
     </div>
   </div >`)
   
@@ -62,38 +65,53 @@ async function editUserInfos(){
   const closeBtn =  document.querySelector(".close-button-modal")
   if(closeBtn){
     console.log(closeBtn)
-    closeBtn.addEventListener(`click`, ()=>{
+    closeBtn.addEventListener('click', (event)=>{
+      event.preventDefault
       modal.classList.add("closeModal")})
   }})
-  getNewUserInfos()
- 
-
-}
-
-
-export async function getNewUserInfos(){
-  const inputs = document.querySelectorAll("input")
-  const btnEdit =  document.getElementById("editGoBtn")
-  const newInfosUser = {}
   
+    const inputs = document.querySelectorAll("input")
+    const newInfosUser = {}
+    const btnEdit =  document.querySelector(".buttonmodal")
+    
+    if(btnEdit){
+    console.log(btnEdit)
+    btnEdit.addEventListener('click',(event)=>{
+      event.preventDefault
+      newInfosUser[inputs.name]=inputs.value
+      console.log(JSON.stringify(newInfosUser))
+    })
+    return newInfosUser
+  }
+  }
  
-  console.log(btnEdit)
-  btnEdit.addEventListener(`click`,()=>{
-    newInfosUser[inputs.name]=inputs.value
-  })
-  console.log(JSON.stringify(newInfosUser))
+  const mock = {
+    "username": "Kenzinho M2",
+    "password": "123456",
+    "email": "kenzinhoM2@mail.com"
+  }
 
-  return JSON.stringify(newInfosUser)
+
+
+  patchUserInfos(mock)
+  console.log(patchUserInfos(mock))
+
+export async function logout(){
+  const btn_logout = document.getElementById(btn_logout)
+  console.log(btn_logout)
+  if(btn_logout){
+  btn_logout.addEventListener(`click`, (event)=>{
+    event.preventDefault
+    localStorage.clear()
+  
+  })}
 }
-editUserInfos()
-getNewUserInfos()
+logout()
 
-
-
-/* editUserInfos()
-getNewUserInfos()
-getCoworkersByToken()
-renderUserInfos() */
+ editUserInfos()
+ // getNewUserInfos()
+// getCoworkersByToken()
+renderUserInfos() 
 
 
 // botao edit nao esta funcionando, precisa pegar as infos e mandar com patch para os ervidor, e entao buscar renderizra os coworkers atraves do {{ _.baseUrl }}/users/departments/coworkersm , metodo get 

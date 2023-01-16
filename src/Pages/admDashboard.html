@@ -5,32 +5,72 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kenzie Empresas</title>
-    <link rel="stylesheet" href="/m2-projeto-frotend-empresas.-pdrocosta/src/Styles/index.css">
-    <link rel="stylesheet" href="/m2-projeto-frotend-empresas.-pdrocosta/src/Styles/globalStyles.css">
-    <link rel="stylesheet" href="/m2-projeto-frotend-empresas.-pdrocosta/src/Styles/register.css">
-    <link rel="stylesheet" href="/m2-projeto-frotend-empresas.-pdrocosta/src/Styles/login.css">
+    <link rel="stylesheet" href="/src/Styles/globalStyles.css">
+    <link rel="stylesheet" href="/src/Styles/admDashboard.css">
+
 
 </head>
 <body>
     <header>
-        <img src="/m2-projeto-frotend-empresas.-pdrocosta/src/Assets/Ellipse 1.png" alt="elipse1">
+        <div id="div_logo">
+        <img src="/src/Assets/Ellipse 1.png
+        " alt="elipse1">
         <h1>Kenzie Empresas</h1>
+        </div>
         <div id="header_div_button">
                 <a href="/index.html"> 
-            <button id="btn_logout" class="button_header">btn_logout</button></a>
+            <button id="btn_logout" class="button_header">Logout</button></a>
         </div>
     </header>
     <main>
-        <section id="infos_user">
-            <h1 id="user_h1"></h1>
-            <div id="div_infos">
-                <p id="email_user"></p>
-                <button id="edit_user"><img src="/m2-projeto-frotend-empresas.-pdrocosta/src/Assets/iconPencil.png" alt="iconEdit"></button>
+        <section id="section-departamentos">
+            <div id="div-departamentos">
+                <h3>Departamentos</h3>
+                <select name="selecionar Empresa" id="select-empresa">
+                    <option id="option-placeholder" value="">Selecionar Empresa</option>
+                </select>
+                <button type="button" id="button-criar"><img src="/src/Assets/IconX.png" alt=""> <p>Criar</p></button>
             </div>
+            <div id="div-departamentos-wrapper">
+                <ul id="ul-departamento">
+                    
+                </ul>
+            </div>
+            <section id="section-usuarios">
+                <h3 id="h3-Usuários">Usuários </h3>
+                <div>
+                    <ul id="ul-usuarios">
+                    </ul>
+                </div>
+            </section>
+            <section id="section-usuarios">
+                <h3 id="h3-Usuários">Usuários sem departamento</h3>
+                <div>
+                    <ul id="ul-outof">
+                    </ul>
+                </div>
+            </section>
         </section>
-        <section>
-            <h1>Voce ainda nao foi contratado</h1>
+        <section class="modal none" id="modal_none">
+            <div class="modal">
+                <div class="div-modal" id="criar-departamento">
+                    <button class="close-button-modal"><img src="/src/Assets/iconX.png" alt=""></button>
+                    <h2 class="h2-modal">Criar Departamento</h2>
+                    <form action="" class="form-editar">
+                        <input type="text" name="name" class="input-modal" placeholder="Nome do departamento">
+                        <input type="text" name="description" class="input-modal" placeholder="Descrição">
+                        
+                    </form>
+                    <select class="input-modal" name="select_company" id="select_new" title="Selecione a empresa" >
+                            <option  id="option-placeholder" value="" disabled selected>Selecionar Empresa</option>
+                        </select>
+                        
+                        <button class="button-modal" id="btnCreate" >Criar Departamento</button>
+                </div>
+            </div >
         </section>
+        
     </main>
 </body>
+<script type="module" defer src="/src/Script/admDashboard.js"></script>
 </html>

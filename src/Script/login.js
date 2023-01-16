@@ -75,12 +75,13 @@ async function getUser(dataUser, token) {
   if(auth.is_admin){
     window.location.replace("/src/Pages/admDashboard.html")
   }
-  else if(!auth){
-    window.location.replace("/index.html")
+  else if(!auth.is_admin){
+   
+    window.location.replace("/src/Pages/user1Dashboard.html")
     
   }
   else{
-    window.location.replace("/src/Pages/user1Dashboard.html")
+    window.location.replace("/index.html")
   }
   return auth
   }

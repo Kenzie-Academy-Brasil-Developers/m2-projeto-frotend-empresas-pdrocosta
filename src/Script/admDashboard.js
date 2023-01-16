@@ -12,8 +12,204 @@
 15- dashboard user2  - editar informacoes pessoais, como user, email e senha. atualiza api 
 16- dashboard user 2 - renderizare coworkers com nome e cargo, nome da empresa e departamento */
 
-import { getUser } from "./requests.js";
+import { getAllCompanies, getUser, getAllDptsAdm, getOutofWork, getallUsers, renderChosenDpt, postNewDpt} from "./request.js"
 
+
+async function renderAllDpts(){
+  const allDpts = await getAllDptsAdm()
+  const allDptsJSON = [allDpts]
+  const ulDpts = document.querySelector("#ul-departamento")
+  console.log(ulDpts)
+  console.log(allDptsJSON)
+
+  allDpts.map((e)=>{
+    ulDpts.insertAdjacentHTML('beforeend',`
+    <li class="card-departamento">
+                          <h3 class="h3-departamento" >${e.name}</h3>
+                          <p class="p-descrição" >${e.description}</p>
+                          <p class="p-nome">${e.companies.name}</p>
+                          <div class="div-icones">
+                              <img class="img-olho" src="/src/Assets/iconEye.png" alt="">
+                              <img class="img-lapis" src="/src/Assets/iconPencil.png" alt="">
+                              <img class="img-delete" src="/src/Assets/iconTrash.png" alt="">
+                          </div>
+                      </li>
+    
+    `)
+  })
+}
+renderAllDpts()
+
+async function renderAllOut(){
+  const allOut = await getOutofWork()
+  const ulOutOf = document.querySelector("#ul-outof")
+  console.log(ulOutOf)
+  console.log(allOut)
+
+  allOut.map((e)=>{
+    ulOutOf.insertAdjacentHTML('beforeend',`
+      
+      <li class="card-outof">
+      <h3 class="h3-outof">${e.username}</h3>
+      <p class="p-outof">${e.kind_of_work} </p>
+      <p class="p-outof-nome">${e.email}</p>
+      <div class="div-icones">
+          <img class="img-lapis" src="/src/Assets/iconPencil.png" alt="">
+          <img class="img-delete" src="/src/Assets/iconTrash.png" alt="">
+      </li>
+    
+    `)
+  })
+}
+renderAllOut()
+
+
+async function renderAllUsers(){
+  const allUsers = await getallUsers()
+  const ulUsers = document.querySelector("#ul-usuarios")
+  console.log(allUsers)
+  console.log(ulUsers)
+
+  allUsers.map((e)=>{
+    ulUsers.insertAdjacentHTML('beforeend',`
+      
+      <li class="card-outof">
+      <h3 class="h3-outof">${e.username}</h3>
+      <p class="p-outof">${e.kind_of_work} </p>
+      <p class="p-outof-nome">${e.email}</p>
+      <div class="div-icones">
+          <img class="img-lapis" src="/src/Assets/iconPencil.png" alt="">
+          <img class="img-delete" src="/src/Assets/iconTrash.png" alt="">
+      </li>
+    
+    `)
+  })
+}
+renderAllUsers()
+
+async function renderDPToptions(){
+  const allDpts = await getAllDptsAdm()
+  const select_empresa = document.querySelector("#select-empresa")
+  console.log(allDpts)
+
+  allDpts.map((e)=>{
+    select_empresa.insertAdjacentHTML('beforeend',`
+    <option class="optionDpt" value="${e.name}">${e.name}</option>
+  `)
+  })
+
+}
+renderDPToptions()
+
+async function filterByDpt(){
+  const optionChosen =  document.querySelector("#select-empresa")
+  if(optionChosen){
+    optionChosen.addEventListener('change', (e)=>{
+   
+    const chosenDpt =  optionChosen.value
+    console.log(chosenDpt)
+    renderChosenDpt(chosenDpt)
+    })
+}}
+filterByDpt()
+
+async function getInfosNewDpt(){
+  const btn_add_dpt = document.querySelector("#button-criar")
+  const main =  document.querySelector("main")
+  const modal_none =  document.querySelector("#modal_none")
+  if(btn_add_dpt){
+    btn_add_dpt.addEventListener('click', (e)=>{
+      modal_none.classList.toggle("none")
+      e.preventDefault()
+      main.insertAdjacentHTML('beforeend',`
+      
+      `)
+    })
+  }
+  
+  
+}
+
+async function createNewDpt(){
+  const btnCreate = document.querySelector("#btnCreate")
+  const inputs = document.querySelector(".input-modal")
+  const newDpt = {}
+
+  if(btnCreate){
+  btnCreate.addEventListener('click',()=>{
+    inputs.forEach(
+    newDpt[inputs.name] = inputs.value
+    )
+    return newDpt
+  })
+   const newDptJSON = JSON.stringify(newDpt)
+   postNewDpt(newDptJSON)
+  }
+  console.log
+  return postNewDpt(newDptJSON) ? true : false
+}
+
+async function renderSelectEmpresas(){
+  window.onload = async function() {
+  const select = document.querySelector("#select_new")
+  console.log(select)
+  const companies = await getAllCompanies()
+
+if(select){
+  companies.map((e)=>{
+    select.insertAdjacentHTML('beforeend',`
+    <option  id="option${e.name}" value="${e.uuid}">${e.name}</option>
+    `)
+  })}}}
+
+
+  
+
+async function getCompanyUid(){
+  const btnCreate = document.querySelector("#btnCreate")
+  if(btnCreate){
+    btnCreate.addEventListener('click',()=>{
+      
+    })
+
+}
+}
+
+(getAllCompanies())
+getInfosNewDpt()
+renderSelectEmpresas()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 function renderDash() {
   const user = getUser()
 
@@ -143,4 +339,4 @@ export async function deleteProductById(product_id) {
   }
 
   return productJson;
-}
+} */
