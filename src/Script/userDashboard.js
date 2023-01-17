@@ -103,18 +103,14 @@ export async function logout(){
   btn_logout.addEventListener(`click`, (event)=>{
     event.preventDefault
     localStorage.clear()
-  
+    window.replace.(".../index.html")
   })}
 }
 logout()
-
- editUserInfos()
- // getNewUserInfos()
-// getCoworkersByToken()
+editUserInfos()
 renderUserInfos() 
 
 
-// botao edit nao esta funcionando, precisa pegar as infos e mandar com patch para os ervidor, e entao buscar renderizra os coworkers atraves do {{ _.baseUrl }}/users/departments/coworkersm , metodo get 
 
 
 
