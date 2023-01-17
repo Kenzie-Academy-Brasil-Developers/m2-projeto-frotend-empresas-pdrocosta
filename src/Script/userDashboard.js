@@ -82,19 +82,10 @@ async function editUserInfos(){
       console.log(JSON.stringify(newInfosUser))
     })
     return newInfosUser
-  }
-  }
- 
-  const mock = {
-    "username": "Kenzinho M2",
-    "password": "123456",
-    "email": "kenzinhoM2@mail.com"
-  }
+  }}
+  
+  patchUserInfos(editUserInfos())
 
-
-
-  patchUserInfos(mock)
-  console.log(patchUserInfos(mock))
 
 export async function logout(){
   const btn_logout = document.getElementById(btn_logout)
@@ -103,7 +94,7 @@ export async function logout(){
   btn_logout.addEventListener(`click`, (event)=>{
     event.preventDefault
     localStorage.clear()
-    window.replace.(".../index.html")
+    window.location.replace("/index.html")
   })}
 }
 logout()

@@ -29,8 +29,6 @@ export function getUser() {
   const user = JSON.parse(localStorage.getItem("token"))
   return user
 }
-
-
 export async function requestUserInfos(){
   const userInfosGET = await fetch('http://localhost:6278/users/profile',{
     method: 'GET',
